@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+os.system("pipenv install --dev")
+lint_result = os.system("pipenv run flake8 --ignore=E501 .")
+if lint_result:
+    sys.exit(1)
+
+sys.exit(0)

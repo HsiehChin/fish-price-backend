@@ -1,0 +1,12 @@
+stages:
+    - test
+
+lint_and_test:
+    image: python:3.7
+    stage: test
+    script:
+        - cat $DB_CONFIG > ./config/db.yaml
+        - pip install pipenv
+        - pipenv install --dev
+        - pipenv run flake8 --ignore=E501 .
+
