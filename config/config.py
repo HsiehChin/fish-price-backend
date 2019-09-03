@@ -12,7 +12,12 @@ class Config(object):
         path = os.path.join(self.__path, "db.yaml")
         with open(path, "r") as file:
             config = yaml.full_load(file)
-            uri = "mongodb://{user}:{password}@{host}:{port}".format(user=config["user"], password=config["password"], host=config["host"], port=config["port"])
+            uri = "mongodb://{user}:{password}@{host}:{port}".format(
+                user=config["user"],
+                password=config["password"],
+                host=config["host"],
+                port=config["port"],
+            )
             return MongoClient(uri)
         return None
 
