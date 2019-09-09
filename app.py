@@ -13,9 +13,10 @@ COLLECT = DB["marketDB"]["fishPrice"]
 APP = Flask(__name__)
 APP.config["SEND_FILE_MAX_AGE_DEFAULT"] = 1
 CORS(APP, supports_credentials=True)
+URL_PREFIX = '/service/fishPriceBackend'
 
 
-@APP.route("/fish/<start_date>/<end_date>", methods=["GET"])
+@APP.route(URL_PREFIX + "/fish/<start_date>/<end_date>", methods=["GET"])
 def get_fishlist(start_date, end_date):
     """Filter the fish type that have been sold in the query interval.
 
@@ -93,7 +94,7 @@ def get_fishlist(start_date, end_date):
     return jsonify(result)
 
 
-@APP.route("/fish/<date>/<market>/<fish_type>/price", methods=["GET"])
+@APP.route(URL_PREFIX + "/fish/<date>/<market>/<fish_type>/price", methods=["GET"])
 def oneday_data(date, market, fish_type):
     """Returns selling info on query date(one day).
 
@@ -145,7 +146,7 @@ def oneday_data(date, market, fish_type):
 
 
 @APP.route(
-    "/fish/<start_date>/<end_date>/<market>/<fish_type>/price", methods=["GET"]
+    URL_PREFIX + "/fish/<start_date>/<end_date>/<market>/<fish_type>/price", methods=["GET"]
 )
 def period_data(start_date, end_date, market, fish_type):
     """Returns selling info in query interval(period).
